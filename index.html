@@ -523,6 +523,35 @@
       margin-top: 18px;
     }
 
+    .campus-map-card {
+      position: relative;
+      margin-top: 42px;
+      width: min(760px, 100%);
+      overflow: hidden;
+      border-radius: 12px;
+      border: 1px solid rgba(227, 180, 111, 0.14);
+      background: rgba(8, 10, 20, 0.82);
+      box-shadow: 16px 18px 34px rgba(0, 0, 0, 0.42);
+    }
+
+    .campus-map-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 24px 24px;
+      pointer-events: none;
+      opacity: 0.32;
+    }
+
+    .campus-map-card img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
     .cards {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -965,7 +994,7 @@
       <div class="section-inner about-layout">
         <div class="about-text">
           <div class="section-kicker">⯌ ABOUT ATERIS</div>
-          <h2>Welcome to<br />Ateris Academy</h2>
+          <h2>Welcome to<br /><span style="white-space: nowrap;">Ateris Academy</span></h2>
           <div class="about-title-line"><span>✦</span></div>
           <h3 class="about-subtitle">에테르로부터, 지혜가 태어난다.</h3>
           <p>
@@ -978,6 +1007,10 @@
           <p>
             하늘의 별처럼 빛나는 모든 학생들의 잠재력을 믿습니다.
           </p>
+
+          <div class="campus-map-card">
+            <img src="./images/ateris-map.png" alt="Ateris Academy Map" />
+          </div>
         </div>
 
         <div class="about-visual">
