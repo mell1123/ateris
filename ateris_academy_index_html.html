@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ateris 아카데미 | Ex Aethere, Sapientia.</title>
+  <meta name="description" content="달의 위상 아래 지혜와 마법을 배우는 Ateris 아카데미 공식 홈페이지">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+  <style>
+    :root {
+      --bg: #07111f;
+      --panel: rgba(10, 18, 33, 0.72);
+      --gold: #e8c681;
+      --soft-gold: #f4ddb0;
+      --text: #f6f1e8;
+      --muted: #c8c0b5;
+      --cresnel: #e7e5dc;
+      --arclune: #2f75c9;
+      --plenaris: #dc8a25;
+      --umbrel: #6a3b95;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      color: var(--text);
+      background:
+        linear-gradient(rgba(5, 10, 20, .5), rgba(5, 10, 20, .85)),
+        url('https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=2200&q=85') center/cover fixed,
+        var(--bg);
+      font-family: ui-serif, Georgia, 'Times New Roman', serif;
+    }
+
+    nav.container-fluid {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(14px);
+      background: rgba(4, 9, 19, .76);
+      border-bottom: 1px solid rgba(232, 198, 129, .22);
+    }
+
+    nav a, nav strong { color: var(--soft-gold); }
+    nav [role="button"] { background: var(--gold); border-color: var(--gold); color: #17110a; }
+
+    main.container { padding-top: 3rem; padding-bottom: 3rem; }
+
+    .hero {
+      min-height: 72vh;
+      display: grid;
+      align-items: center;
+      padding: 6rem 0 4rem;
+    }
+
+    .hero-card, article, .house-card, .feature-card {
+      background: var(--panel);
+      border: 1px solid rgba(232, 198, 129, .28);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, .36);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-card {
+      padding: clamp(2rem, 6vw, 5rem);
+      border-radius: 28px;
+      max-width: 900px;
+    }
+
+    .script-logo {
+      font-size: clamp(4.5rem, 13vw, 10rem);
+      line-height: .85;
+      color: var(--soft-gold);
+      letter-spacing: -.06em;
+      margin: 0;
+      text-shadow: 0 0 40px rgba(232, 198, 129, .45);
+      font-style: italic;
+    }
+
+    .korean-title {
+      color: var(--gold);
+      font-size: clamp(1.4rem, 3vw, 2.25rem);
+      letter-spacing: .28em;
+      margin-top: 1rem;
+    }
+
+    .motto {
+      color: var(--soft-gold);
+      font-size: clamp(1.35rem, 3vw, 2rem);
+      margin-top: 2rem;
+    }
+
+    .moon-divider {
+      color: var(--gold);
+      letter-spacing: .75rem;
+      margin: 1.75rem 0;
+    }
+
+    h1, h2, h3 { color: var(--soft-gold); }
+    p, li { color: var(--muted); }
+
+    .section-title {
+      text-align: center;
+      margin: 4rem 0 2rem;
+    }
+
+    .house-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .house-card {
+      border-radius: 22px;
+      padding: 1.5rem;
+      min-height: 360px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .house-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: .18;
+      background: radial-gradient(circle at top, var(--accent), transparent 58%);
+      pointer-events: none;
+    }
+
+    .house-card > * { position: relative; }
+    .cresnel { --accent: var(--cresnel); }
+    .arclune { --accent: var(--arclune); }
+    .plenaris { --accent: var(--plenaris); }
+    .umbrel { --accent: var(--umbrel); }
+
+    .moon-symbol {
+      font-size: 4rem;
+      display: block;
+      color: var(--accent);
+      text-shadow: 0 0 24px var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: .25rem .65rem;
+      border-radius: 999px;
+      color: #0b1020;
+      background: var(--accent);
+      font-size: .85rem;
+      margin-bottom: 1rem;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .feature-card {
+      border-radius: 22px;
+      padding: 1.5rem;
+    }
+
+    figure img {
+      border-radius: 24px;
+      border: 1px solid rgba(232, 198, 129, .25);
+      box-shadow: 0 24px 70px rgba(0,0,0,.38);
+    }
+
+    figcaption, figcaption a { color: var(--muted); }
+
+    .uniform-list li { margin-bottom: .65rem; }
+
+    section[aria-label="Subscribe example"] {
+      padding: 3rem 0;
+      background: linear-gradient(90deg, rgba(232,198,129,.1), rgba(58,88,150,.12));
+      border-top: 1px solid rgba(232,198,129,.2);
+      border-bottom: 1px solid rgba(232,198,129,.2);
+    }
+
+    input { background: rgba(255,255,255,.92) !important; color: #121212 !important; }
+    button { background: var(--gold); border-color: var(--gold); color: #17110a; }
+
+    footer.container {
+      padding-top: 2rem;
+      padding-bottom: 3rem;
+      text-align: center;
+    }
+
+    footer a, footer small { color: var(--soft-gold); }
+
+    @media (max-width: 980px) {
+      .house-grid, .feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 640px) {
+      nav.container-fluid { position: static; }
+      .house-grid, .feature-grid { grid-template-columns: 1fr; }
+      .hero { min-height: auto; padding-top: 3rem; }
+      .script-logo { font-size: 4.3rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="container-fluid">
+    <ul>
+      <li><strong>Ateris Academy</strong></li>
+    </ul>
+    <ul>
+      <li><a href="#houses">기숙사</a></li>
+      <li><a href="#uniform">교복</a></li>
+      <li><a href="#admission" role="button">입학 안내</a></li>
+    </ul>
+  </nav>
+
+  <main class="container">
+    <section class="hero" id="home">
+      <div class="hero-card">
+        <p class="script-logo">Ateris</p>
+        <p class="korean-title">아카데미</p>
+        <p class="moon-divider">✦ ☾ ✦</p>
+        <hgroup>
+          <h1>달빛 아래 깨어나는 마법과 지혜</h1>
+          <h2 class="motto">“Ex Aethere, Sapientia.”</h2>
+        </hgroup>
+        <p>Ateris 아카데미는 별의 흐름, 달의 위상, 그리고 스스로의 선택을 통해 마법사의 길을 발견하는 고풍스러운 마법학교입니다.</p>
+      </div>
+    </section>
+
+    <div class="grid">
+      <section>
+        <hgroup class="section-title">
+          <h2>하늘의 뜻을 읽는 학교</h2>
+          <h3>지식은 에테르에서 오고, 지혜는 선택에서 완성된다.</h3>
+        </hgroup>
+        <figure>
+          <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?auto=format&fit=crop&w=1600&q=85" alt="밤하늘과 달빛 아래의 판타지 아카데미 분위기">
+          <figcaption><a href="https://unsplash.com" target="_blank">Moonlit fantasy mood image from Unsplash</a></figcaption>
+        </figure>
+        <h3>교육 철학</h3>
+        <p>아테리스의 수업은 별자리 해석, 기초 주문학, 에테르 연금술, 지팡이 공명술, 고대 문장 해독으로 구성됩니다. 학생들은 각자의 달의 위상에 따라 네 기숙사 중 하나에 배정됩니다.</p>
+      </section>
+    </div>
+
+    <section id="houses">
+      <hgroup class="section-title">
+        <h2>Four Houses of Ateris</h2>
+        <h3>네 개의 달, 네 가지 재능</h3>
+      </hgroup>
+      <div class="house-grid">
+        <article class="house-card cresnel">
+          <span class="moon-symbol">☾</span>
+          <span class="badge">흰색 · 회색</span>
+          <h3>크레스넬<br><small>Cresnel</small></h3>
+          <p>초승달의 기숙사. 새로운 시작, 순수한 호기심, 조용한 탐구심을 상징합니다.</p>
+          <p><strong>가치:</strong> 탐구 · 성찰 · 순수</p>
+        </article>
+        <article class="house-card arclune">
+          <span class="moon-symbol">◐</span>
+          <span class="badge">청색계열</span>
+          <h3>아클룬<br><small>Arclune</small></h3>
+          <p>상현달의 기숙사. 균형과 질서를 추구하며 지식과 조화를 통해 길을 비춥니다.</p>
+          <p><strong>가치:</strong> 균형 · 지혜 · 조화</p>
+        </article>
+        <article class="house-card plenaris">
+          <span class="moon-symbol">○</span>
+          <span class="badge">주황색 · 금색</span>
+          <h3>플레나리스<br><small>Plenaris</small></h3>
+          <p>보름달의 기숙사. 빛과 열정, 창조의 힘으로 모두를 이끄는 학생들이 모입니다.</p>
+          <p><strong>가치:</strong> 열정 · 창조 · 용기</p>
+        </article>
+        <article class="house-card umbrel">
+          <span class="moon-symbol">☽</span>
+          <span class="badge">보라색 · 검정색</span>
+          <h3>움브렐<br><small>Umbrel</small></h3>
+          <p>하현달 혹은 삭의 기숙사. 비밀, 직관, 변화를 받아들이는 깊은 사유의 집입니다.</p>
+          <p><strong>가치:</strong> 직관 · 비밀 · 변화</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="uniform">
+      <hgroup class="section-title">
+        <h2>Uniform & Academy Items</h2>
+        <h3>달의 문장을 품은 학생의 복식</h3>
+      </hgroup>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <h3>정식 교복</h3>
+          <ul class="uniform-list">
+            <li>흰색 블레이저</li>
+            <li>초승달 앰블럼</li>
+            <li>검은색 셔츠</li>
+            <li>흰색 바지 또는 치마</li>
+            <li>기숙사 대표색 넥타이 또는 리본</li>
+          </ul>
+        </article>
+        <article class="feature-card">
+          <h3>편한 버전</h3>
+          <ul class="uniform-list">
+            <li>흰색 조끼</li>
+            <li>검은색 셔츠</li>
+            <li>기숙사 대표색 넥타이 또는 리본</li>
+            <li>실습 수업에 적합한 간소 복장</li>
+          </ul>
+        </article>
+        <article class="feature-card">
+          <h3>공통 장비</h3>
+          <ul class="uniform-list">
+            <li>검은색 망토</li>
+            <li>하얀색 통일 마법지팡이</li>
+            <li>달빛 봉인 학생증</li>
+            <li>초승달 문장 노트</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <section aria-label="Subscribe example" id="admission">
+    <div class="container">
+      <article>
+        <hgroup>
+          <h2>입학 소식 받기</h2>
+          <h3>다음 보름달의 신입생 모집 공지를 받아보세요.</h3>
+        </hgroup>
+        <form class="grid">
+          <input type="text" id="firstname" name="firstname" placeholder="First name" aria-label="First name" required>
+          <input type="email" id="email" name="email" placeholder="Email address" aria-label="Email address" required>
+          <button type="submit" onclick="event.preventDefault()">Subscribe</button>
+        </form>
+      </article>
+    </div>
+  </section>
+
+  <footer class="container">
+    <small>
+      <a href="#home">Ateris</a> • <a href="#houses">Houses</a> • <a href="#uniform">Uniform</a>
+    </small>
+    <p><small>© Ateris Academy. Ex Aethere, Sapientia.</small></p>
+  </footer>
+</body>
+</html>
