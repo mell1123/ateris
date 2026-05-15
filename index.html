@@ -85,6 +85,94 @@
       width: 100%;
     }
 
+    .music-ui {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border: 1px solid rgba(242, 234, 221, 0.24);
+      border-radius: 999px;
+      background: rgba(8, 10, 20, 0.32);
+      color: #f2eadd;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 0.74rem;
+      letter-spacing: 0.12em;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, color 0.25s ease;
+    }
+
+    .music-ui:hover {
+      transform: translateY(-1px);
+      border-color: rgba(227, 180, 111, 0.62);
+      box-shadow: 0 0 18px rgba(227, 180, 111, 0.18);
+    }
+
+    .music-icon {
+      color: #e3b46f;
+      font-size: 0.9rem;
+      line-height: 1;
+    }
+
+    .volume-bars {
+      display: inline-flex;
+      align-items: flex-end;
+      gap: 2px;
+      height: 10px;
+    }
+
+    .volume-bars i {
+      display: block;
+      width: 2px;
+      background: currentColor;
+      opacity: 0.8;
+      border-radius: 99px;
+    }
+
+    .volume-bars i:nth-child(1) { height: 4px; }
+    .volume-bars i:nth-child(2) { height: 7px; }
+    .volume-bars i:nth-child(3) { height: 10px; }
+
+    .navbar.scrolled .music-ui {
+      color: rgba(15, 15, 15, 0.86);
+      border-color: rgba(0, 0, 0, 0.16);
+      background: rgba(255, 255, 255, 0.42);
+    }
+
+    .navbar.scrolled .music-icon {
+      color: #a86d2b;
+    }
+
+    .music-ui.playing {
+      border-color: rgba(227, 180, 111, 0.62);
+      box-shadow: 0 0 20px rgba(227, 180, 111, 0.22);
+    }
+
+    .music-ui.playing .volume-bars i {
+      animation: equalizer 0.9s ease-in-out infinite;
+      transform-origin: bottom;
+    }
+
+    .music-ui.playing .volume-bars i:nth-child(2) {
+      animation-delay: 0.15s;
+    }
+
+    .music-ui.playing .volume-bars i:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+
+    @keyframes equalizer {
+      0%, 100% {
+        transform: scaleY(0.55);
+        opacity: 0.5;
+      }
+
+      50% {
+        transform: scaleY(1.2);
+        opacity: 1;
+      }
+    }
+
     .navbar.scrolled {
       background: rgba(255, 255, 255, 0.92);
       border-bottom: 1px solid rgba(0, 0, 0, 0.08);
@@ -414,21 +502,6 @@
       transition: transform 0.3s ease, box-shadow 0.35s ease;
     }
 
-    .dormitory-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image:
-        radial-gradient(circle at 18% 22%, rgba(255,255,255,0.16) 0 1px, transparent 2px),
-        radial-gradient(circle at 72% 30%, rgba(227,180,111,0.12) 0 1px, transparent 2px),
-        radial-gradient(circle at 48% 68%, rgba(120,170,255,0.12) 0 1px, transparent 2px),
-        radial-gradient(circle at 82% 78%, rgba(255,255,255,0.10) 0 1px, transparent 2px),
-        radial-gradient(circle at 28% 82%, rgba(170,120,255,0.12) 0 1px, transparent 2px);
-      opacity: 0.65;
-      animation: cardParticles 7s linear infinite;
-      pointer-events: none;
-    }
-
     .dormitory-card::after {
       content: "";
       position: absolute;
@@ -651,23 +724,6 @@
       background: linear-gradient(180deg, rgba(110,70,170,0.18), rgba(8,10,20,0.96));
     }
 
-    @keyframes cardParticles {
-      0% {
-        transform: translateY(0px);
-        opacity: 0.45;
-      }
-
-      50% {
-        transform: translateY(-8px);
-        opacity: 0.75;
-      }
-
-      100% {
-        transform: translateY(-16px);
-        opacity: 0.45;
-      }
-    }
-
     @media (max-width: 860px) {
       .about-layout {
         grid-template-columns: 1fr;
@@ -700,6 +756,12 @@
       }
     }
 
+    @media (max-width: 860px) {
+      .motto-card {
+        display: none;
+      }
+    }
+
     @media (max-width: 560px) {
       .nav-links a:nth-child(2),
       .nav-links a:nth-child(3) {
@@ -721,6 +783,9 @@
   </style>
 </head>
 <body>
+  <audio id="bgm" loop>
+    <source src="./music/ateris-theme.mp3" type="audio/mpeg" />
+  </audio>
   <header class="navbar">
     <a class="logo" href="#home">Ateris</a>
     <nav class="nav-links">
@@ -728,6 +793,13 @@
       <a href="#about">학교소개</a>
       <a href="#houses">기숙사</a>
       <a href="#admission">입학문의</a>
+      <button class="music-ui" id="musicToggle" type="button" aria-label="배경음악 재생">
+        <span class="music-icon">♪</span>
+        <span class="music-text">BGM</span>
+        <span class="volume-bars">
+          <i></i><i></i><i></i>
+        </span>
+      </button>
     </nav>
   </header>
 
@@ -791,7 +863,7 @@
             <div class="dormitory-divider fancy-divider"><span>✦</span></div>
             <div class="dormitory-color">흰색</div>
             <div class="dormitory-divider"></div>
-            <strong>순수, 가능성</strong>
+            <strong>순수 · 가능성</strong>
             <p>
               돌연변이나 혼혈 학생들이 많이 속하는 기숙사.
               무한한 가능성의 상징입니다.
@@ -805,7 +877,7 @@
             <div class="dormitory-divider fancy-divider"><span>✦</span></div>
             <div class="dormitory-color">푸른색</div>
             <div class="dormitory-divider"></div>
-            <strong>균형, 이성</strong>
+            <strong>균형 · 이성</strong>
             <p>
               이성과 균형을 중시하는 학생들의 집단.
               차분하고 논리적인 사고를 지닌 이들이 모입니다.
@@ -819,7 +891,7 @@
             <div class="dormitory-divider fancy-divider"><span>✦</span></div>
             <div class="dormitory-color">노란색</div>
             <div class="dormitory-divider"></div>
-            <strong>완성, 명예</strong>
+            <strong>완성 · 명예</strong>
             <p>
               명문 기숙사로, 귀족 자제들이 많이 속합니다.
               완성과 풍요를 상징합니다.
@@ -833,7 +905,7 @@
             <div class="dormitory-divider fancy-divider"><span>✦</span></div>
             <div class="dormitory-color">보라색</div>
             <div class="dormitory-divider"></div>
-            <strong>심연, 위험</strong>
+            <strong>심연 · 위험</strong>
             <p>
               비상한 머리를 가진 아이들이 속하는 기숙사.
               심연의 지혜를 탐구합니다.
@@ -1030,6 +1102,34 @@
       meteors = meteors.filter(m => m.life > 0 && m.x < window.innerWidth + 220 && m.y < window.innerHeight + 220);
 
       requestAnimationFrame(animate);
+
+    const bgm = document.getElementById("bgm");
+    const musicToggle = document.getElementById("musicToggle");
+    const musicIcon = document.querySelector(".music-icon");
+
+    bgm.volume = 0.35;
+
+    let isPlaying = false;
+
+    musicToggle.addEventListener("click", async () => {
+      try {
+        if (!isPlaying) {
+          await bgm.play();
+          isPlaying = true;
+          musicToggle.classList.add("playing");
+          musicToggle.setAttribute("aria-label", "배경음악 음소거");
+          musicIcon.textContent = "♫";
+        } else {
+          bgm.pause();
+          isPlaying = false;
+          musicToggle.classList.remove("playing");
+          musicToggle.setAttribute("aria-label", "배경음악 재생");
+          musicIcon.textContent = "♪";
+        }
+      } catch (error) {
+        console.error("BGM playback failed:", error);
+      }
+    });
     }
 
     const navbar = document.querySelector(".navbar");
