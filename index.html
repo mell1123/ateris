@@ -1,342 +1,498 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Ateris 아카데미 | Ex Aethere, Sapientia.</title>
-  <meta name="description" content="달의 위상 아래 지혜와 마법을 배우는 Ateris 아카데미 공식 홈페이지">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ateris Academy</title>
   <style>
-    :root {
-      --bg: #07111f;
-      --panel: rgba(10, 18, 33, 0.72);
-      --gold: #e8c681;
-      --soft-gold: #f4ddb0;
-      --text: #f6f1e8;
-      --muted: #c8c0b5;
-      --cresnel: #e7e5dc;
-      --arclune: #2f75c9;
-      --plenaris: #dc8a25;
-      --umbrel: #6a3b95;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
-      color: var(--text);
-      background:
-        linear-gradient(rgba(5, 10, 20, .5), rgba(5, 10, 20, .85)),
-        url('https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=2200&q=85') center/cover fixed,
-        var(--bg);
-      font-family: ui-serif, Georgia, 'Times New Roman', serif;
+      font-family: "Pretendard", "Noto Sans KR", sans-serif;
+      background: #06070d;
+      color: #fff;
+      overflow-x: hidden;
     }
 
-    nav.container-fluid {
-      position: sticky;
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* 상단바 */
+    .navbar {
+      position: fixed;
       top: 0;
-      z-index: 10;
-      backdrop-filter: blur(14px);
-      background: rgba(4, 9, 19, .76);
-      border-bottom: 1px solid rgba(232, 198, 129, .22);
-    }
-
-    nav a, nav strong { color: var(--soft-gold); }
-    nav [role="button"] { background: var(--gold); border-color: var(--gold); color: #17110a; }
-
-    main.container { padding-top: 3rem; padding-bottom: 3rem; }
-
-    .hero {
-      min-height: 72vh;
-      display: grid;
+      left: 0;
+      width: 100%;
+      z-index: 20;
+      display: flex;
       align-items: center;
-      padding: 6rem 0 4rem;
+      justify-content: space-between;
+      padding: 22px 7vw;
+      background: rgba(6, 7, 13, 0.18);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    .hero-card, article, .house-card, .feature-card {
-      background: var(--panel);
-      border: 1px solid rgba(232, 198, 129, .28);
-      box-shadow: 0 30px 80px rgba(0, 0, 0, .36);
-      backdrop-filter: blur(10px);
+    .logo {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.45rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.94);
     }
 
-    .hero-card {
-      padding: clamp(2rem, 6vw, 5rem);
-      border-radius: 28px;
-      max-width: 900px;
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      color: rgba(255, 255, 255, 0.82);
     }
 
-    .script-logo {
-      font-size: clamp(4.5rem, 13vw, 10rem);
-      line-height: .85;
-      color: var(--soft-gold);
-      letter-spacing: -.06em;
-      margin: 0;
-      text-shadow: 0 0 40px rgba(232, 198, 129, .45);
-      font-style: italic;
-    }
-
-    .korean-title {
-      color: var(--gold);
-      font-size: clamp(1.4rem, 3vw, 2.25rem);
-      letter-spacing: .28em;
-      margin-top: 1rem;
-    }
-
-    .motto {
-      color: var(--soft-gold);
-      font-size: clamp(1.35rem, 3vw, 2rem);
-      margin-top: 2rem;
-    }
-
-    .moon-divider {
-      color: var(--gold);
-      letter-spacing: .75rem;
-      margin: 1.75rem 0;
-    }
-
-    h1, h2, h3 { color: var(--soft-gold); }
-    p, li { color: var(--muted); }
-
-    .section-title {
-      text-align: center;
-      margin: 4rem 0 2rem;
-    }
-
-    .house-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 1rem;
-    }
-
-    .house-card {
-      border-radius: 22px;
-      padding: 1.5rem;
-      min-height: 360px;
+    .nav-links a {
       position: relative;
-      overflow: hidden;
+      transition: color 0.25s ease;
     }
 
-    .house-card::before {
-      content: '';
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -7px;
+      width: 0;
+      height: 1px;
+      background: linear-gradient(90deg, #f8e7a5, #ffffff, #9fc7ff);
+      transition: width 0.25s ease;
+    }
+
+    .nav-links a:hover {
+      color: #fff;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* 히어로 */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background-image:
+        linear-gradient(rgba(3, 4, 10, 0.28), rgba(3, 4, 10, 0.7)),
+        url("./images/ateris-bg.jpg");
+      background-size: cover;
+      background-position: center;
+    }
+
+    .hero::before {
+      content: "";
       position: absolute;
       inset: 0;
-      opacity: .18;
-      background: radial-gradient(circle at top, var(--accent), transparent 58%);
+      background:
+        radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.18), transparent 18%),
+        radial-gradient(circle at 50% 70%, rgba(77, 118, 181, 0.24), transparent 35%);
       pointer-events: none;
     }
 
-    .house-card > * { position: relative; }
-    .cresnel { --accent: var(--cresnel); }
-    .arclune { --accent: var(--arclune); }
-    .plenaris { --accent: var(--plenaris); }
-    .umbrel { --accent: var(--umbrel); }
-
-    .moon-symbol {
-      font-size: 4rem;
-      display: block;
-      color: var(--accent);
-      text-shadow: 0 0 24px var(--accent);
-      margin-bottom: 1rem;
+    #magicCanvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
     }
 
-    .badge {
-      display: inline-block;
-      padding: .25rem .65rem;
-      border-radius: 999px;
-      color: #0b1020;
-      background: var(--accent);
-      font-size: .85rem;
-      margin-bottom: 1rem;
-    }
-
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1rem;
-    }
-
-    .feature-card {
-      border-radius: 22px;
-      padding: 1.5rem;
-    }
-
-    figure img {
-      border-radius: 24px;
-      border: 1px solid rgba(232, 198, 129, .25);
-      box-shadow: 0 24px 70px rgba(0,0,0,.38);
-    }
-
-    figcaption, figcaption a { color: var(--muted); }
-
-    .uniform-list li { margin-bottom: .65rem; }
-
-    section[aria-label="Subscribe example"] {
-      padding: 3rem 0;
-      background: linear-gradient(90deg, rgba(232,198,129,.1), rgba(58,88,150,.12));
-      border-top: 1px solid rgba(232,198,129,.2);
-      border-bottom: 1px solid rgba(232,198,129,.2);
-    }
-
-    input { background: rgba(255,255,255,.92) !important; color: #121212 !important; }
-    button { background: var(--gold); border-color: var(--gold); color: #17110a; }
-
-    footer.container {
-      padding-top: 2rem;
-      padding-bottom: 3rem;
+    .hero-content {
+      position: relative;
+      z-index: 2;
       text-align: center;
+      padding: 0 24px;
+      transform: translateY(18px);
     }
 
-    footer a, footer small { color: var(--soft-gold); }
-
-    @media (max-width: 980px) {
-      .house-grid, .feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .title-image {
+      width: min(760px, 82vw);
+      max-height: 280px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 18px rgba(255, 245, 199, 0.28)) drop-shadow(0 0 42px rgba(123, 170, 255, 0.22));
+      animation: titleFloat 5.5s ease-in-out infinite;
     }
 
-    @media (max-width: 640px) {
-      nav.container-fluid { position: static; }
-      .house-grid, .feature-grid { grid-template-columns: 1fr; }
-      .hero { min-height: auto; padding-top: 3rem; }
-      .script-logo { font-size: 4.3rem; }
+    @keyframes titleFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .hero-subtitle {
+      margin-top: 18px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(0.92rem, 1.6vw, 1.18rem);
+      letter-spacing: 0.16em;
+      color: rgba(255, 255, 255, 0.78);
+      text-shadow: 0 0 14px rgba(255, 255, 255, 0.18);
+    }
+
+    .explore-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 44px;
+      padding: 15px 34px;
+      border: 1px solid rgba(255, 255, 255, 0.48);
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.04));
+      color: #fff;
+      font-size: 0.98rem;
+      letter-spacing: 0.08em;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 22px rgba(255, 238, 175, 0.16), inset 0 0 18px rgba(255, 255, 255, 0.06);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+
+    .explore-btn:hover {
+      transform: translateY(-3px);
+      border-color: rgba(255, 239, 181, 0.85);
+      box-shadow: 0 0 30px rgba(255, 238, 175, 0.28), 0 0 56px rgba(115, 159, 255, 0.16);
+    }
+
+    .scroll-hint {
+      position: absolute;
+      z-index: 2;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      color: rgba(255, 255, 255, 0.52);
+    }
+
+    /* 아래 섹션 */
+    .section {
+      min-height: 100vh;
+      padding: 120px 8vw;
+      background:
+        radial-gradient(circle at top left, rgba(108, 134, 210, 0.14), transparent 32%),
+        linear-gradient(180deg, #06070d, #0d0e18 54%, #080910);
+    }
+
+    .section-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .section-kicker {
+      color: #e9d38e;
+      letter-spacing: 0.18em;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .section h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.2rem, 5vw, 4.7rem);
+      font-weight: 400;
+      margin-bottom: 24px;
+    }
+
+    .section p {
+      max-width: 760px;
+      line-height: 1.9;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 1.05rem;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-top: 56px;
+    }
+
+    .card {
+      min-height: 210px;
+      padding: 26px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.055);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 20px 70px rgba(0, 0, 0, 0.22);
+    }
+
+    .card h3 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.45rem;
+      margin-bottom: 12px;
+    }
+
+    .card span {
+      display: block;
+      color: rgba(255, 255, 255, 0.6);
+      line-height: 1.65;
+      font-size: 0.92rem;
+    }
+
+    .cresnel { box-shadow: inset 0 0 45px rgba(240, 240, 240, 0.08); }
+    .arclune { box-shadow: inset 0 0 45px rgba(75, 139, 255, 0.15); }
+    .plenaris { box-shadow: inset 0 0 45px rgba(255, 174, 73, 0.18); }
+    .umbrel { box-shadow: inset 0 0 45px rgba(146, 87, 255, 0.16); }
+
+    @media (max-width: 860px) {
+      .navbar {
+        padding: 18px 5vw;
+      }
+
+      .nav-links {
+        gap: 16px;
+        font-size: 0.78rem;
+      }
+
+      .logo {
+        font-size: 1rem;
+      }
+
+      .cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 560px) {
+      .nav-links a:nth-child(2),
+      .nav-links a:nth-child(3) {
+        display: none;
+      }
+
+      .title-image {
+        width: 90vw;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
-  <nav class="container-fluid">
-    <ul>
-      <li><strong>Ateris Academy</strong></li>
-    </ul>
-    <ul>
-      <li><a href="#houses">기숙사</a></li>
-      <li><a href="#uniform">교복</a></li>
-      <li><a href="#admission" role="button">입학 안내</a></li>
-    </ul>
-  </nav>
+  <header class="navbar">
+    <a class="logo" href="#home">Ateris</a>
+    <nav class="nav-links">
+      <a href="#home">홈</a>
+      <a href="#about">학교소개</a>
+      <a href="#houses">기숙사</a>
+      <a href="#admission">입학문의</a>
+    </nav>
+  </header>
 
-  <main class="container">
-    <section class="hero" id="home">
-      <div class="hero-card">
-        <p class="script-logo">Ateris</p>
-        <p class="korean-title">아카데미</p>
-        <p class="moon-divider">✦ ☾ ✦</p>
-        <hgroup>
-          <h1>달빛 아래 깨어나는 마법과 지혜</h1>
-          <h2 class="motto">“Ex Aethere, Sapientia.”</h2>
-        </hgroup>
-        <p>Ateris 아카데미는 별의 흐름, 달의 위상, 그리고 스스로의 선택을 통해 마법사의 길을 발견하는 고풍스러운 마법학교입니다.</p>
+  <main>
+    <section id="home" class="hero">
+      <canvas id="magicCanvas"></canvas>
+
+      <div class="hero-content">
+        <!-- 네가 만든 투명 배경 캘리그라피 이미지 파일로 바꿔 넣으면 됨 -->
+        <img class="title-image" src="./images/ateris-title.png" alt="Ateris Academy" />
+        <div class="hero-subtitle">Ex Aethere, Sapientia.</div>
+        <a class="explore-btn" href="#about">학교 둘러보기</a>
+      </div>
+
+      <div class="scroll-hint">SCROLL</div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="section-inner">
+        <div class="section-kicker">Welcome to Ateris Academy</div>
+        <h2>에테르로부터,<br />지혜가 태어나는 곳.</h2>
+        <p>
+          아테리스 아카데미는 에테르의 흐름을 읽고, 고대의 언어와 원소의 질서를 연구하는 마법 교육기관입니다.
+          이곳의 학생들은 별빛 아래에서 지팡이를 들고, 각자의 달빛을 따라 성장합니다.
+        </p>
+
+        <div id="houses" class="cards">
+          <article class="card cresnel">
+            <h3>Cresnel</h3>
+            <span>초승달의 기숙사. 흰색과 회색. 가능성과 순수한 시작을 상징합니다.</span>
+          </article>
+          <article class="card arclune">
+            <h3>Arclune</h3>
+            <span>상현달의 기숙사. 청색 계열. 균형과 이성, 섬세한 판단을 상징합니다.</span>
+          </article>
+          <article class="card plenaris">
+            <h3>Plenaris</h3>
+            <span>보름달의 기숙사. 주황색과 금색. 완성과 찬란한 성취를 상징합니다.</span>
+          </article>
+          <article class="card umbrel">
+            <h3>Umbrel</h3>
+            <span>하현달과 삭의 기숙사. 보라색과 검정색. 그림자와 깊은 통찰을 상징합니다.</span>
+          </article>
+        </div>
       </div>
     </section>
 
-    <div class="grid">
-      <section>
-        <hgroup class="section-title">
-          <h2>하늘의 뜻을 읽는 학교</h2>
-          <h3>지식은 에테르에서 오고, 지혜는 선택에서 완성된다.</h3>
-        </hgroup>
-        <figure>
-          <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?auto=format&fit=crop&w=1600&q=85" alt="밤하늘과 달빛 아래의 판타지 아카데미 분위기">
-          <figcaption><a href="https://unsplash.com" target="_blank">Moonlit fantasy mood image from Unsplash</a></figcaption>
-        </figure>
-        <h3>교육 철학</h3>
-        <p>아테리스의 수업은 별자리 해석, 기초 주문학, 에테르 연금술, 지팡이 공명술, 고대 문장 해독으로 구성됩니다. 학생들은 각자의 달의 위상에 따라 네 기숙사 중 하나에 배정됩니다.</p>
-      </section>
-    </div>
-
-    <section id="houses">
-      <hgroup class="section-title">
-        <h2>Four Houses of Ateris</h2>
-        <h3>네 개의 달, 네 가지 재능</h3>
-      </hgroup>
-      <div class="house-grid">
-        <article class="house-card cresnel">
-          <span class="moon-symbol">☾</span>
-          <span class="badge">흰색 · 회색</span>
-          <h3>크레스넬<br><small>Cresnel</small></h3>
-          <p>초승달의 기숙사. 새로운 시작, 순수한 호기심, 조용한 탐구심을 상징합니다.</p>
-          <p><strong>가치:</strong> 탐구 · 성찰 · 순수</p>
-        </article>
-        <article class="house-card arclune">
-          <span class="moon-symbol">◐</span>
-          <span class="badge">청색계열</span>
-          <h3>아클룬<br><small>Arclune</small></h3>
-          <p>상현달의 기숙사. 균형과 질서를 추구하며 지식과 조화를 통해 길을 비춥니다.</p>
-          <p><strong>가치:</strong> 균형 · 지혜 · 조화</p>
-        </article>
-        <article class="house-card plenaris">
-          <span class="moon-symbol">○</span>
-          <span class="badge">주황색 · 금색</span>
-          <h3>플레나리스<br><small>Plenaris</small></h3>
-          <p>보름달의 기숙사. 빛과 열정, 창조의 힘으로 모두를 이끄는 학생들이 모입니다.</p>
-          <p><strong>가치:</strong> 열정 · 창조 · 용기</p>
-        </article>
-        <article class="house-card umbrel">
-          <span class="moon-symbol">☽</span>
-          <span class="badge">보라색 · 검정색</span>
-          <h3>움브렐<br><small>Umbrel</small></h3>
-          <p>하현달 혹은 삭의 기숙사. 비밀, 직관, 변화를 받아들이는 깊은 사유의 집입니다.</p>
-          <p><strong>가치:</strong> 직관 · 비밀 · 변화</p>
-        </article>
-      </div>
-    </section>
-
-    <section id="uniform">
-      <hgroup class="section-title">
-        <h2>Uniform & Academy Items</h2>
-        <h3>달의 문장을 품은 학생의 복식</h3>
-      </hgroup>
-      <div class="feature-grid">
-        <article class="feature-card">
-          <h3>정식 교복</h3>
-          <ul class="uniform-list">
-            <li>흰색 블레이저</li>
-            <li>초승달 앰블럼</li>
-            <li>검은색 셔츠</li>
-            <li>흰색 바지 또는 치마</li>
-            <li>기숙사 대표색 넥타이 또는 리본</li>
-          </ul>
-        </article>
-        <article class="feature-card">
-          <h3>편한 버전</h3>
-          <ul class="uniform-list">
-            <li>흰색 조끼</li>
-            <li>검은색 셔츠</li>
-            <li>기숙사 대표색 넥타이 또는 리본</li>
-            <li>실습 수업에 적합한 간소 복장</li>
-          </ul>
-        </article>
-        <article class="feature-card">
-          <h3>공통 장비</h3>
-          <ul class="uniform-list">
-            <li>검은색 망토</li>
-            <li>하얀색 통일 마법지팡이</li>
-            <li>달빛 봉인 학생증</li>
-            <li>초승달 문장 노트</li>
-          </ul>
-        </article>
+    <section id="admission" class="section">
+      <div class="section-inner">
+        <div class="section-kicker">Admission</div>
+        <h2>입학문의</h2>
+        <p>
+          별이 가장 밝게 흔들리는 밤, 아테리스의 문은 새로운 마법사를 기다립니다.
+          입학 안내, 교복 규정, 기숙사 배정식 등의 내용은 이 영역에 추가하면 됩니다.
+        </p>
       </div>
     </section>
   </main>
 
-  <section aria-label="Subscribe example" id="admission">
-    <div class="container">
-      <article>
-        <hgroup>
-          <h2>입학 소식 받기</h2>
-          <h3>다음 보름달의 신입생 모집 공지를 받아보세요.</h3>
-        </hgroup>
-        <form class="grid">
-          <input type="text" id="firstname" name="firstname" placeholder="First name" aria-label="First name" required>
-          <input type="email" id="email" name="email" placeholder="Email address" aria-label="Email address" required>
-          <button type="submit" onclick="event.preventDefault()">Subscribe</button>
-        </form>
-      </article>
-    </div>
-  </section>
+  <script>
+    const canvas = document.getElementById("magicCanvas");
+    const ctx = canvas.getContext("2d");
 
-  <footer class="container">
-    <small>
-      <a href="#home">Ateris</a> • <a href="#houses">Houses</a> • <a href="#uniform">Uniform</a>
-    </small>
-    <p><small>© Ateris Academy. Ex Aethere, Sapientia.</small></p>
-  </footer>
+    let width = 0;
+    let height = 0;
+    let particles = [];
+    let meteors = [];
+    let nextMeteorTime = 0;
+
+    const colors = [
+      { core: "rgba(255,255,255,", glow: "rgba(255,255,255," },
+      { core: "rgba(255,222,137,", glow: "rgba(255,206,96," },
+      { core: "rgba(143,190,255,", glow: "rgba(95,153,255," },
+      { core: "rgba(213,196,255,", glow: "rgba(157,112,255," }
+    ];
+
+    function resizeCanvas() {
+      width = canvas.width = window.innerWidth * window.devicePixelRatio;
+      height = canvas.height = window.innerHeight * window.devicePixelRatio;
+      canvas.style.width = window.innerWidth + "px";
+      canvas.style.height = window.innerHeight + "px";
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+
+      const isMobile = window.innerWidth < 640;
+      const count = isMobile ? 70 : 120;
+      particles = Array.from({ length: count }, createParticle);
+    }
+
+    function createParticle() {
+      return {
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+        radius: Math.random() * 1.8 + 0.7,
+        glow: Math.random() * 18 + 10,
+        vx: (Math.random() - 0.5) * 0.22,
+        vy: (Math.random() - 0.5) * 0.22,
+        phase: Math.random() * Math.PI * 2,
+        speed: Math.random() * 0.025 + 0.012,
+        color: colors[Math.floor(Math.random() * colors.length)]
+      };
+    }
+
+    function spawnMeteor() {
+      const startX = Math.random() * window.innerWidth * 0.75;
+      const startY = -40;
+      meteors.push({
+        x: startX,
+        y: startY,
+        length: Math.random() * 140 + 120,
+        speed: Math.random() * 7 + 8,
+        angle: Math.PI / 4 + Math.random() * 0.22,
+        life: 1,
+        decay: Math.random() * 0.008 + 0.012
+      });
+      nextMeteorTime = performance.now() + Math.random() * 4000 + 3000;
+    }
+
+    function drawParticle(p) {
+      p.x += p.vx;
+      p.y += p.vy;
+      p.phase += p.speed;
+
+      if (p.x < -20) p.x = window.innerWidth + 20;
+      if (p.x > window.innerWidth + 20) p.x = -20;
+      if (p.y < -20) p.y = window.innerHeight + 20;
+      if (p.y > window.innerHeight + 20) p.y = -20;
+
+      const twinkle = 0.35 + Math.sin(p.phase) * 0.28 + 0.37;
+      const alpha = Math.max(0.12, Math.min(1, twinkle));
+
+      const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.glow);
+      gradient.addColorStop(0, p.color.glow + (alpha * 0.42) + ")");
+      gradient.addColorStop(1, p.color.glow + "0)");
+
+      ctx.fillStyle = gradient;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.glow, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = p.color.core + alpha + ")";
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    function drawMeteor(m) {
+      const dx = Math.cos(m.angle) * m.length;
+      const dy = Math.sin(m.angle) * m.length;
+      const tailX = m.x - dx;
+      const tailY = m.y - dy;
+
+      const gradient = ctx.createLinearGradient(tailX, tailY, m.x, m.y);
+      gradient.addColorStop(0, "rgba(255,255,255,0)");
+      gradient.addColorStop(0.45, `rgba(255,219,131,${0.22 * m.life})`);
+      gradient.addColorStop(1, `rgba(255,255,255,${0.95 * m.life})`);
+
+      ctx.strokeStyle = gradient;
+      ctx.lineWidth = 2.2;
+      ctx.beginPath();
+      ctx.moveTo(tailX, tailY);
+      ctx.lineTo(m.x, m.y);
+      ctx.stroke();
+
+      const headGlow = ctx.createRadialGradient(m.x, m.y, 0, m.x, m.y, 18);
+      headGlow.addColorStop(0, `rgba(255,255,255,${0.9 * m.life})`);
+      headGlow.addColorStop(0.45, `rgba(255,217,126,${0.45 * m.life})`);
+      headGlow.addColorStop(1, "rgba(255,217,126,0)");
+      ctx.fillStyle = headGlow;
+      ctx.beginPath();
+      ctx.arc(m.x, m.y, 18, 0, Math.PI * 2);
+      ctx.fill();
+
+      m.x += Math.cos(m.angle) * m.speed;
+      m.y += Math.sin(m.angle) * m.speed;
+      m.life -= m.decay;
+    }
+
+    function animate(now) {
+      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+      particles.forEach(drawParticle);
+
+      if (now > nextMeteorTime) {
+        spawnMeteor();
+      }
+
+      meteors.forEach(drawMeteor);
+      meteors = meteors.filter(m => m.life > 0 && m.x < window.innerWidth + 220 && m.y < window.innerHeight + 220);
+
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+    nextMeteorTime = performance.now() + 1200;
+    requestAnimationFrame(animate);
+  </script>
 </body>
 </html>
