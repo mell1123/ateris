@@ -24,7 +24,7 @@
         radial-gradient(circle at top left, rgba(108, 134, 210, 0.10), transparent 32%),
         radial-gradient(circle at bottom right, rgba(227, 180, 111, 0.06), transparent 26%),
         linear-gradient(180deg, #06070d 0%, #0a0c16 45%, #080910 100%);
-      background-attachment: fixed;
+      background-attachment: scroll;
       color: #f2eadd;
       overflow-x: hidden;
     }
@@ -523,46 +523,67 @@
       margin-top: 18px;
     }
 
-    .campus-map-hero {
+    .campus-map-section {
+      min-height: auto;
+      padding-top: 40px;
+      padding-bottom: 40px;
+    }
+
+    .campus-map-card {
       position: relative;
-      min-height: 78vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width: 100%;
       overflow: hidden;
-      background-image: url("./images/ateris-map.png");
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      border-top: 1px solid rgba(227, 180, 111, 0.10);
-      border-bottom: 1px solid rgba(227, 180, 111, 0.10);
+      border-radius: 12px;
+      border: 1px solid rgba(227, 180, 111, 0.14);
+      background: rgba(8, 10, 20, 0.94);
+      box-shadow: 18px 22px 42px rgba(0, 0, 0, 0.42);
     }
 
-    .campus-map-overlay {
-      display: none;
+    .campus-map-card img {
+      width: 100%;
+      display: block;
+      object-fit: contain;
     }
 
-    .campus-map-content {
-      position: relative;
-      z-index: 2;
-      width: min(1120px, 86vw);
-      color: #f2eadd;
+    .curriculum-section {
+      min-height: auto;
+      padding-top: 32px;
+      padding-bottom: 120px;
     }
 
-    .campus-map-content h2 {
-      font-family: "Bodoni Moda", Georgia, serif;
-      font-size: clamp(2.6rem, 7vw, 6rem);
-      font-weight: 400;
-      line-height: 0.95;
-      margin-bottom: 24px;
-      text-shadow: 0 0 26px rgba(0, 0, 0, 0.42);
+    .curriculum-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 38px;
     }
 
-    .campus-map-content p {
-      max-width: 520px;
-      color: rgba(242, 234, 221, 0.78);
+    .curriculum-tag {
+      padding: 14px 22px;
+      border-radius: 999px;
+      border: 1px solid rgba(227, 180, 111, 0.16);
+      background: rgba(255, 255, 255, 0.04);
+      color: rgba(242, 234, 221, 0.84);
+      font-size: 0.76rem;
+      letter-spacing: 0.18em;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.24);
+      transition: transform 0.28s ease, border-color 0.28s ease;
+    }
+
+    .curriculum-tag:hover {
+      transform: translateY(-2px);
+      border-color: rgba(227, 180, 111, 0.42);
+    }
+
+    .curriculum-description {
+      margin-top: 28px;
+      max-width: 100%;
+      width: 100%;
+      color: rgba(242, 234, 221, 0.62);
+      font-size: 0.98rem;
       line-height: 1.9;
-      font-size: 1.02rem;
+      word-break: keep-all;
     }
 
     .cards {
@@ -1039,8 +1060,35 @@
       </div>
     </section>
 
-    <section id="campus-map" class="campus-map-hero">
-      <div class="campus-map-overlay"></div>
+    <section id="campus-map" class="section campus-map-section">
+      <div class="section-inner">
+        <div class="section-kicker">⯌ MAP</div>
+        <div class="campus-map-card">
+          <img src="./images/ateris-map.png" alt="Ateris Academy Campus Map" />
+        </div>
+      </div>
+    </section>
+
+    <section id="curriculum" class="section curriculum-section">
+      <div class="section-inner">
+        <div class="section-kicker">⯌ CURRICULUM</div>
+
+        <div class="curriculum-tags">
+          <div class="curriculum-tag">원소학</div>
+          <div class="curriculum-tag">식물학</div>
+          <div class="curriculum-tag">고대어 해석</div>
+          <div class="curriculum-tag">고대 유적 탐사</div>
+          <div class="curriculum-tag">에테르 이론</div>
+          <div class="curriculum-tag">마력 제어 실습</div>
+          <div class="curriculum-tag">저주 해석학</div>
+          <div class="curriculum-tag">고대 연금술</div>
+          <div class="curriculum-tag">별점술</div>
+          <div class="curriculum-tag">정령 계약학</div>
+          <div class="curriculum-tag">결계학</div>
+        </div>
+
+        <p class="curriculum-description">아테리스는 실전 마법과 학문 연구를 함께 추구합니다. 원소와 별, 고대의 언어와 금기된 지식까지 학생들은 끝없는 탐구 속에서 자신만의 가능성을 발견하게 됩니다.</p>
+      </div>
     </section>
 
     <section id="houses" class="section">
