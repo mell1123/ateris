@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ateris Academy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -17,7 +20,11 @@
 
     body {
       font-family: "Pretendard", "Noto Sans KR", sans-serif;
-      background: #06070d;
+      background:
+        radial-gradient(circle at top left, rgba(108, 134, 210, 0.10), transparent 32%),
+        radial-gradient(circle at bottom right, rgba(227, 180, 111, 0.06), transparent 26%),
+        linear-gradient(180deg, #06070d 0%, #0a0c16 45%, #080910 100%);
+      background-attachment: fixed;
       color: #f2eadd;
       overflow-x: hidden;
     }
@@ -45,7 +52,7 @@
     }
 
     .logo {
-      font-family: Georgia, "Times New Roman", serif;
+      font-family: "Bodoni Moda", Georgia, serif;
       font-size: 1.45rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
@@ -207,9 +214,6 @@
       content: "";
       position: absolute;
       inset: 0;
-      background:
-        radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.18), transparent 18%),
-        radial-gradient(circle at 50% 70%, rgba(77, 118, 181, 0.24), transparent 35%);
       pointer-events: none;
     }
 
@@ -230,12 +234,61 @@
       transform: translateY(18px);
     }
 
-    .title-image {
-      width: min(760px, 82vw);
-      max-height: 280px;
-      object-fit: contain;
-      filter: drop-shadow(0 0 18px rgba(255, 245, 199, 0.28)) drop-shadow(0 0 42px rgba(123, 170, 255, 0.22));
+    .title-logo-text {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
       animation: titleFloat 5.5s ease-in-out infinite;
+    }
+
+    .title-small {
+      color: rgba(227, 180, 111, 0.82);
+      font-size: clamp(0.7rem, 1vw, 0.9rem);
+      letter-spacing: 0.34em;
+      text-transform: uppercase;
+      text-shadow: 0 0 18px rgba(227, 180, 111, 0.24);
+    }
+
+    .title-latin {
+      color: #e3b46f;
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-shadow: 0 0 16px rgba(227, 180, 111, 0.24);
+      margin-bottom: 6px;
+    }
+
+    .title-logo-text h1 {
+      font-family: "Bodoni Moda", Georgia, serif;
+      font-size: clamp(3rem, 8.5vw, 6.8rem);
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      line-height: 0.62;
+      color: #f2eadd;
+      text-shadow:
+        0 0 18px rgba(255, 245, 199, 0.18),
+        0 0 42px rgba(123, 170, 255, 0.16);
+    }
+
+    .title-main {
+      display: inline-block;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      line-height: 0.9;
+      transform: scaleX(1.08);
+      transform-origin: center;
+    }
+
+    .title-sub {
+      display: inline-block;
+      font-size: calc(0.54em - 5px);
+      letter-spacing: 0.1em;
+      margin-top: -18px;
+      opacity: 0.92;
+      transform: scaleX(1.04);
+      transform-origin: center;
     }
 
     @keyframes titleFloat {
@@ -244,9 +297,10 @@
     }
 
     .hero-subtitle {
-      margin-top: 18px;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(0.92rem, 1.6vw, 1.18rem);
+      margin-top: 34px;
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: calc(clamp(0.92rem, 1.6vw, 1.18rem) - 3pt);
+      line-height: 1.9;
       letter-spacing: 0.16em;
       color: rgba(242, 234, 221, 0.78);
       text-shadow: 0 0 14px rgba(255, 255, 255, 0.18);
@@ -290,9 +344,7 @@
     .section {
       min-height: 100vh;
       padding: 120px 8vw;
-      background:
-        radial-gradient(circle at top left, rgba(108, 134, 210, 0.14), transparent 32%),
-        linear-gradient(180deg, #06070d, #0d0e18 54%, #080910);
+      background: transparent;
     }
 
     .section-inner {
@@ -312,9 +364,10 @@
     }
 
     .section h2 {
-      font-family: Georgia, "Times New Roman", serif;
+      font-family: "Bodoni Moda", Georgia, serif;
       font-size: clamp(1.9rem, 4.2vw, 3.9rem);
       font-weight: 400;
+      line-height: 0.92;
       margin-bottom: 24px;
     }
 
@@ -327,7 +380,7 @@
 
     .about-layout {
       display: grid;
-      grid-template-columns: 0.95fr 1.05fr;
+      grid-template-columns: 0.82fr 1.18fr;
       gap: 72px;
       align-items: center;
       min-height: 72vh;
@@ -335,8 +388,8 @@
 
     .about-visual {
       position: relative;
-      width: min(430px, 100%);
-      aspect-ratio: 0.92 / 1;
+      width: min(500px, 100%);
+      aspect-ratio: 0.82 / 1;
     }
 
     .about-image-box {
@@ -459,7 +512,7 @@
     .about-subtitle {
       margin: 0 0 26px;
       color: #e3b46f;
-      font-family: Georgia, "Times New Roman", serif;
+      font-family: "Cormorant Garamond", Georgia, serif;
       font-size: clamp(1.25rem, 2.2vw, 1.85rem);
       font-weight: 400;
       line-height: 1.55;
@@ -588,7 +641,7 @@
     }
 
     .dormitory-card h3 {
-      font-family: Georgia, "Times New Roman", serif;
+      font-family: "Bodoni Moda", Georgia, serif;
       font-size: 2.1rem;
       font-weight: 400;
       margin-bottom: 18px;
@@ -756,6 +809,10 @@
     }
 
     @media (max-width: 1100px) {
+      .image-facility-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
       .dormitory-grid {
         grid-template-columns: repeat(2, 1fr);
       }
@@ -805,6 +862,22 @@
     }
 
     @media (max-width: 560px) {
+      .image-facility-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .dormitory-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .dormitory-card {
+        width: 100%;
+        max-width: 340px;
+        margin: 0 auto;
+        aspect-ratio: auto;
+      }
+
       .dormitory-card {
         min-height: unset;
         padding: 34px 24px;
@@ -832,14 +905,13 @@
         font-size: 0.82rem;
       }
 
-      .dormitory-grid {
       .nav-links a:nth-child(2),
       .nav-links a:nth-child(3) {
         display: none;
       }
 
-      .title-image {
-        width: 90vw;
+      .title-logo-text h1 {
+        font-size: clamp(2.4rem, 12vw, 4.2rem);
       }
 
       .cards {
@@ -849,7 +921,8 @@
       .dormitory-grid {
         grid-template-columns: 1fr;
       }
-    }
+
+      
   </style>
 </head>
 <body>
@@ -859,7 +932,6 @@
   <header class="navbar">
     <a class="logo" href="#home">Ateris</a>
     <nav class="nav-links">
-      <a href="#home">홈</a>
       <a href="#about">학교소개</a>
       <a href="#houses">기숙사</a>
       <a href="#admission">입학문의</a>
@@ -878,8 +950,11 @@
       <canvas id="magicCanvas"></canvas>
 
       <div class="hero-content">
-        <img class="title-image" src="./images/ateris-title.png" alt="Ateris Academy" />
-        <div class="hero-subtitle">Ex Aethere, Sapientia.</div>
+        <div class="title-logo-text">
+          <div class="title-latin">Ex Aethere, Sapientia</div>
+          <h1><span class="title-main">ATERIS</span><br /><span class="title-sub">ACADEMY</span></h1>
+          <div class="hero-subtitle">에테르로부터, 지혜가 태어난다.</div>
+        </div>
         <a class="explore-btn" href="#about">학교 둘러보기</a>
       </div>
 
@@ -917,6 +992,7 @@
               <strong>Ex&nbsp;Aethere,&nbsp;Sapientia.</strong>
             </div>
           </div>
+        </div>
         </div>
       </div>
     </section>
@@ -979,6 +1055,8 @@
         </div>
       </div>
     </section>
+
+    
 
     <section id="admission" class="section">
       <div class="section-inner">
@@ -1215,9 +1293,4 @@
     window.addEventListener("resize", resizeCanvas);
     window.addEventListener("scroll", updateNavbarState);
     resizeCanvas();
-    updateNavbarState();
-    nextMeteorTime = performance.now() + 1200;
-    requestAnimationFrame(animate);
-  </script>
-</body>
-</html>
+    updateNavbarState
